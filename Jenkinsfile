@@ -9,10 +9,10 @@ node{
         sh 'docker info'
         app = docker.build("kristijankrstevski/jenkins-pipeline-test")
     }
-    stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com/','dockerhub') {
-            app.push("${env.BUILD_NAME}-${env.BUILD_NUMBER}")
-            app.push("${env.BUILD_NAME}-latest")
+    stage('Push image') {   
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            app.push("${env.BRANCH_NAME}-${env.BUILD_NUMBER}")
+            app.push("${env.BRANCH_NAME}-latest")
         }
     }
 }
